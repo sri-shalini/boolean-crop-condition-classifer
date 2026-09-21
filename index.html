@@ -7,7 +7,6 @@
 <title>Boolean Crop Condition Classifier</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -34,7 +33,6 @@ header h1 {
 header p {
     margin-top: 12px;
     font-size: 18px;
-    opacity: 0.95;
 }
 
 .container {
@@ -63,8 +61,6 @@ header p {
     color: #455a64;
 }
 
-/* Simulator */
-
 .input-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -75,7 +71,6 @@ header p {
     display: block;
     font-weight: bold;
     margin-bottom: 7px;
-    color: #37474f;
 }
 
 .input-box input {
@@ -103,3 +98,346 @@ button {
     font-weight: bold;
     cursor: pointer;
 }
+
+button:hover {
+    background: #1b5e20;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.status {
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    background: #f1f8e9;
+    border: 1px solid #c5e1a5;
+}
+
+.status strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #2e7d32;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #607d8b;
+}
+
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Boolean Crop Condition Classifier</h1>
+    <p>Rule-Based Crop Suitability Decision System · Interactive Simulator</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Problem Statement</h2>
+        <p>
+            Crop growth depends on several environmental conditions such as
+            temperature, humidity, soil moisture, rainfall, soil pH and sunlight.
+            This project uses Boolean decision logic to determine whether the
+            given conditions are suitable for crop growth.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Software Solution</h2>
+        <p>
+            The system accepts environmental values from the user and checks
+            them against predefined acceptable ranges. Boolean AND conditions
+            are used to classify the overall crop condition as Suitable or
+            Not Suitable.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Interactive Crop Condition Simulator</h2>
+
+        <div class="input-grid">
+
+            <div class="input-box">
+                <label>Temperature (°C)</label>
+                <input type="number" id="temperature" placeholder="Example: 28">
+            </div>
+
+            <div class="input-box">
+                <label>Humidity (%)</label>
+                <input type="number" id="humidity" placeholder="Example: 65">
+            </div>
+
+            <div class="input-box">
+                <label>Soil Moisture (%)</label>
+                <input type="number" id="soil" placeholder="Example: 55">
+            </div>
+
+            <div class="input-box">
+                <label>Rainfall (mm)</label>
+                <input type="number" id="rainfall" placeholder="Example: 80">
+            </div>
+
+            <div class="input-box">
+                <label>Soil pH</label>
+                <input type="number" id="ph" step="0.1" placeholder="Example: 6.5">
+            </div>
+
+            <div class="input-box">
+                <label>Sunlight (Hours/Day)</label>
+                <input type="number" id="sunlight" step="0.1" placeholder="Example: 7">
+            </div>
+
+        </div>
+
+        <button onclick="classifyCrop()">
+            Check Crop Condition
+        </button>
+
+        <div id="result" class="result">
+            Enter values and check the crop condition.
+        </div>
+
+        <div class="status-grid">
+
+            <div class="status">
+                <strong>Temperature</strong>
+                <span id="tempStatus">Waiting</span>
+            </div>
+
+            <div class="status">
+                <strong>Humidity</strong>
+                <span id="humidityStatus">Waiting</span>
+            </div>
+
+            <div class="status">
+                <strong>Soil Moisture</strong>
+                <span id="soilStatus">Waiting</span>
+            </div>
+
+            <div class="status">
+                <strong>Rainfall</strong>
+                <span id="rainStatus">Waiting</span>
+            </div>
+
+            <div class="status">
+                <strong>Soil pH</strong>
+                <span id="phStatus">Waiting</span>
+            </div>
+
+            <div class="status">
+                <strong>Sunlight</strong>
+                <span id="sunStatus">Waiting</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Condition Range Table</h2>
+
+        <table>
+            <tr>
+                <th>Condition</th>
+                <th>Acceptable Range</th>
+            </tr>
+            <tr>
+                <td>Temperature</td>
+                <td>20 – 35 °C</td>
+            </tr>
+            <tr>
+                <td>Humidity</td>
+                <td>40 – 90 %</td>
+            </tr>
+            <tr>
+                <td>Soil Moisture</td>
+                <td>30 – 80 %</td>
+            </tr>
+            <tr>
+                <td>Rainfall</td>
+                <td>10 – 200 mm</td>
+            </tr>
+            <tr>
+                <td>Soil pH</td>
+                <td>5.5 – 7.5</td>
+            </tr>
+            <tr>
+                <td>Sunlight</td>
+                <td>4 – 10 Hours/Day</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Boolean Decision Logic</h2>
+
+        <p>
+            Crop Condition =
+            Temperature OK AND Humidity OK AND Soil Moisture OK
+            AND Rainfall OK AND Soil pH OK AND Sunlight OK
+        </p>
+
+        <p>
+            If all conditions are TRUE → <strong>Suitable</strong>
+        </p>
+
+        <p>
+            If any condition is FALSE → <strong>Not Suitable</strong>
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    Boolean Crop Condition Classifier · Interactive Project Demo
+</footer>
+
+<script>
+function classifyCrop() {
+
+    let temperature = parseFloat(
+        document.getElementById("temperature").value
+    );
+
+    let humidity = parseFloat(
+        document.getElementById("humidity").value
+    );
+
+    let soil = parseFloat(
+        document.getElementById("soil").value
+    );
+
+    let rainfall = parseFloat(
+        document.getElementById("rainfall").value
+    );
+
+    let ph = parseFloat(
+        document.getElementById("ph").value
+    );
+
+    let sunlight = parseFloat(
+        document.getElementById("sunlight").value
+    );
+
+    if (
+        isNaN(temperature) ||
+        isNaN(humidity) ||
+        isNaN(soil) ||
+        isNaN(rainfall) ||
+        isNaN(ph) ||
+        isNaN(sunlight)
+    ) {
+        document.getElementById("result").innerHTML =
+            "⚠️ Please enter all values.";
+        return;
+    }
+
+    let tempOK =
+        temperature >= 20 && temperature <= 35;
+
+    let humidityOK =
+        humidity >= 40 && humidity <= 90;
+
+    let soilOK =
+        soil >= 30 && soil <= 80;
+
+    let rainfallOK =
+        rainfall >= 10 && rainfall <= 200;
+
+    let phOK =
+        ph >= 5.5 && ph <= 7.5;
+
+    let sunlightOK =
+        sunlight >= 4 && sunlight <= 10;
+
+    let suitable =
+        tempOK &&
+        humidityOK &&
+        soilOK &&
+        rainfallOK &&
+        phOK &&
+        sunlightOK;
+
+    document.getElementById("tempStatus").innerHTML =
+        tempOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    document.getElementById("humidityStatus").innerHTML =
+        humidityOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    document.getElementById("soilStatus").innerHTML =
+        soilOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    document.getElementById("rainStatus").innerHTML =
+        rainfallOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    document.getElementById("phStatus").innerHTML =
+        phOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    document.getElementById("sunStatus").innerHTML =
+        sunlightOK ? "✅ Suitable" : "❌ Not Suitable";
+
+    if (suitable) {
+        document.getElementById("result").innerHTML =
+            "🌱 Crop Condition: Suitable";
+    } else {
+        document.getElementById("result").innerHTML =
+            "⚠️ Crop Condition: Not Suitable";
+    }
+}
+</script>
+
+</body>
+</html>
