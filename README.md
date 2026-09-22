@@ -1,5 +1,5 @@
 # 🌱 Boolean Logic Based Crop Condition Classifier
-
+https://sri-shalini.github.io/boolean-crop-condition-classifer/
 A simple Streamlit web application that classifies crop conditions using Boolean logic based on important agricultural factors.
 
 ## 📌 Project Description
